@@ -28,7 +28,8 @@ CREATE TABLE `products` (
   `product_price` float NOT NULL,
   `product_quantity` int NOT NULL,
   `isDish` tinyint(1) NOT NULL,
-  PRIMARY KEY (`product_ID`)
+  PRIMARY KEY (`product_ID`),
+  UNIQUE KEY `product_ID_UNIQUE` (`product_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -51,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-11-05 20:29:33
+-- Dump completed on 2024-11-09  9:20:27
