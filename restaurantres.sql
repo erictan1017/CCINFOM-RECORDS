@@ -27,7 +27,7 @@ CREATE TABLE `products` (
   `product_name` varchar(45) NOT NULL,
   `product_price` float NOT NULL,
   `product_quantity` int NOT NULL,
-  `isDish` tinyint(1) NOT NULL,
+  `isDish` varchar(3) NOT NULL,
   PRIMARY KEY (`product_ID`),
   UNIQUE KEY `product_ID_UNIQUE` (`product_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -39,7 +39,7 @@ CREATE TABLE `products` (
 
 LOCK TABLES `products` WRITE;
 /*!40000 ALTER TABLE `products` DISABLE KEYS */;
-INSERT INTO `products` VALUES (1,'carrot',20,15,0),(2,'mango shake',150,10,1),(3,'beef shank',600,7,0),(4,'veal',650,5,0),(5,'salmon',700,10,0),(6,'osso buco',850,4,1),(7,'mashed potato',200,5,1),(8,'french onion soup',350,9,1),(9,'minestrone',300,9,1),(10,'tomato',100,15,0);
+INSERT INTO `products` VALUES (1,'carrot',20,15,'No'),(2,'mango shake',150,10,'Yes'),(3,'beef shank',600,7,'No'),(4,'veal',650,5,'No'),(5,'salmon',700,10,'No'),(6,'osso buco',850,4,'Yes'),(7,'mashed potato',200,5,'Yes'),(8,'french onion soup',350,9,'Yes'),(9,'minestrone',300,9,'Yes'),(10,'tomato',100,15,'No');
 /*!40000 ALTER TABLE `products` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -52,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-11-09  9:20:27
+-- Dump completed on 2024-11-10  4:35:50
