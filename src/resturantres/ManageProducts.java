@@ -27,7 +27,7 @@ public class ManageProducts extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
     }
-    public ArrayList<String> getExistingProductIDs(){
+    private ArrayList<String> getExistingProductIDs(){
         try{
             Connection con = MyConnection.getCon();
             Statement st = con.createStatement();
@@ -72,28 +72,32 @@ public class ManageProducts extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        ManageProductslbl = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         productTable = new javax.swing.JTable();
         prodnamelbl = new javax.swing.JLabel();
         prodpricelbl = new javax.swing.JLabel();
         prodquanlbl = new javax.swing.JLabel();
-        prodisDishlbl = new javax.swing.JLabel();
         ProductNameTxt = new javax.swing.JTextField();
         ProductPriceTxt = new javax.swing.JTextField();
         ProductQuantityTxt = new javax.swing.JTextField();
-        isDishComboBox = new javax.swing.JComboBox<>();
         prodSavebtn = new javax.swing.JButton();
         prodUpdatebtn = new javax.swing.JButton();
         prodDeletebtn = new javax.swing.JButton();
         prodClosebtn = new javax.swing.JButton();
         prodIDlbl = new javax.swing.JLabel();
         ProductIDTxt = new javax.swing.JTextField();
-        iconLabel = new javax.swing.JLabel();
+        prodTransactionbtn = new javax.swing.JButton();
+        prodReportbtn = new javax.swing.JButton();
+        prodViewProductslbl = new javax.swing.JLabel();
+        ProductExecuteTxt = new javax.swing.JTextField();
+        prodExecutebtn = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        executeResultsTextArea = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(1280, 720));
+        setPreferredSize(new java.awt.Dimension(1135, 1211));
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
                 formComponentShown(evt);
@@ -101,18 +105,18 @@ public class ManageProducts extends javax.swing.JFrame {
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Franklin Gothic Book", 1, 24)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Manage Products");
-        jLabel1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 0, -1, -1));
+        ManageProductslbl.setFont(new java.awt.Font("Franklin Gothic Book", 1, 24)); // NOI18N
+        ManageProductslbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ManageProductslbl.setText("Manage Products");
+        ManageProductslbl.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        getContentPane().add(ManageProductslbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 0, -1, -1));
 
         productTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "product_ID", "name", "price", "quantity", "isDish"
+                "ID", "name", "price", "quantity"
             }
         ));
         productTable.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -127,23 +131,19 @@ public class ManageProducts extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(productTable);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 46, 710, 1034));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 46, 710, 450));
 
         prodnamelbl.setFont(new java.awt.Font("Nirmala UI", 1, 18)); // NOI18N
         prodnamelbl.setText("Name");
-        getContentPane().add(prodnamelbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 200, -1, -1));
+        getContentPane().add(prodnamelbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 150, -1, -1));
 
         prodpricelbl.setFont(new java.awt.Font("Nirmala UI", 1, 18)); // NOI18N
         prodpricelbl.setText("Price");
-        getContentPane().add(prodpricelbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 310, -1, -1));
+        getContentPane().add(prodpricelbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 260, -1, -1));
 
         prodquanlbl.setFont(new java.awt.Font("Nirmala UI", 1, 18)); // NOI18N
         prodquanlbl.setText("Quantity");
-        getContentPane().add(prodquanlbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 420, -1, -1));
-
-        prodisDishlbl.setFont(new java.awt.Font("Nirmala UI", 1, 18)); // NOI18N
-        prodisDishlbl.setText("isDish");
-        getContentPane().add(prodisDishlbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 530, -1, -1));
+        getContentPane().add(prodquanlbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 370, -1, -1));
 
         ProductNameTxt.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         ProductNameTxt.addActionListener(new java.awt.event.ActionListener() {
@@ -151,22 +151,13 @@ public class ManageProducts extends javax.swing.JFrame {
                 ProductNameTxtActionPerformed(evt);
             }
         });
-        getContentPane().add(ProductNameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 240, 310, -1));
+        getContentPane().add(ProductNameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 190, 310, -1));
 
         ProductPriceTxt.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        getContentPane().add(ProductPriceTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 350, 310, -1));
+        getContentPane().add(ProductPriceTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 300, 310, -1));
 
         ProductQuantityTxt.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        getContentPane().add(ProductQuantityTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 460, 310, -1));
-
-        isDishComboBox.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        isDishComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Yes", "No" }));
-        isDishComboBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                isDishComboBoxActionPerformed(evt);
-            }
-        });
-        getContentPane().add(isDishComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 570, 310, -1));
+        getContentPane().add(ProductQuantityTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 410, 310, -1));
 
         prodSavebtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         prodSavebtn.setText("Save");
@@ -175,7 +166,7 @@ public class ManageProducts extends javax.swing.JFrame {
                 prodSavebtnActionPerformed(evt);
             }
         });
-        getContentPane().add(prodSavebtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 640, -1, -1));
+        getContentPane().add(prodSavebtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 460, -1, -1));
 
         prodUpdatebtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         prodUpdatebtn.setText("Update");
@@ -184,7 +175,7 @@ public class ManageProducts extends javax.swing.JFrame {
                 prodUpdatebtnActionPerformed(evt);
             }
         });
-        getContentPane().add(prodUpdatebtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 640, -1, -1));
+        getContentPane().add(prodUpdatebtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 460, -1, -1));
 
         prodDeletebtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         prodDeletebtn.setText("Delete");
@@ -193,7 +184,7 @@ public class ManageProducts extends javax.swing.JFrame {
                 prodDeletebtnActionPerformed(evt);
             }
         });
-        getContentPane().add(prodDeletebtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 640, -1, -1));
+        getContentPane().add(prodDeletebtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 460, -1, -1));
 
         prodClosebtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         prodClosebtn.setText("Close");
@@ -202,29 +193,57 @@ public class ManageProducts extends javax.swing.JFrame {
                 prodClosebtnActionPerformed(evt);
             }
         });
-        getContentPane().add(prodClosebtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 640, -1, -1));
+        getContentPane().add(prodClosebtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 460, -1, -1));
 
         prodIDlbl.setFont(new java.awt.Font("Nirmala UI", 1, 18)); // NOI18N
         prodIDlbl.setText("ID");
-        getContentPane().add(prodIDlbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 90, 37, -1));
+        getContentPane().add(prodIDlbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 40, 37, -1));
 
         ProductIDTxt.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        getContentPane().add(ProductIDTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 130, 310, -1));
+        getContentPane().add(ProductIDTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 80, 310, -1));
 
-        iconLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/1920x1080-bright-lavender-solid-color-background.jpg"))); // NOI18N
-        iconLabel.addComponentListener(new java.awt.event.ComponentAdapter() {
-            public void componentShown(java.awt.event.ComponentEvent evt) {
-                iconLabelComponentShown(evt);
+        prodTransactionbtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        prodTransactionbtn.setText("Begin Transaction");
+        prodTransactionbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                prodTransactionbtnActionPerformed(evt);
             }
         });
-        getContentPane().add(iconLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(-70, 0, -1, -1));
+        getContentPane().add(prodTransactionbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 500, -1, -1));
+
+        prodReportbtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        prodReportbtn.setText("Generate Report");
+        prodReportbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                prodReportbtnActionPerformed(evt);
+            }
+        });
+        getContentPane().add(prodReportbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 500, -1, -1));
+
+        prodViewProductslbl.setFont(new java.awt.Font("Nirmala UI", 1, 18)); // NOI18N
+        prodViewProductslbl.setText("View Products");
+        getContentPane().add(prodViewProductslbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 540, -1, -1));
+
+        ProductExecuteTxt.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        getContentPane().add(ProductExecuteTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 580, 310, -1));
+
+        prodExecutebtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        prodExecutebtn.setText("Execute ");
+        prodExecutebtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                prodExecutebtnActionPerformed(evt);
+            }
+        });
+        getContentPane().add(prodExecutebtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 630, -1, -1));
+
+        executeResultsTextArea.setColumns(20);
+        executeResultsTextArea.setRows(5);
+        jScrollPane2.setViewportView(executeResultsTextArea);
+
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 510, 700, 440));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void isDishComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_isDishComboBoxActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_isDishComboBoxActionPerformed
 
     private void ProductNameTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProductNameTxtActionPerformed
         // TODO add your handling code here:
@@ -241,7 +260,6 @@ public class ManageProducts extends javax.swing.JFrame {
         String name = ProductNameTxt.getText();
         String price = ProductPriceTxt.getText();
         String quantity = ProductQuantityTxt.getText();
-        String isDish = (String) isDishComboBox.getSelectedItem();
         if (fieldChecker("Save") == 2){
             JOptionPane.showMessageDialog(null, "All fields must be inputted.");
         } 
@@ -251,12 +269,11 @@ public class ManageProducts extends javax.swing.JFrame {
         else {
             try {
                 Connection con = MyConnection.getCon();
-                PreparedStatement ps = con.prepareStatement("insert into products (product_ID, product_name, product_price, product_quantity, isDish) values(?,?,?,?,?)");
+                PreparedStatement ps = con.prepareStatement("insert into products (product_ID, product_name, product_price, product_quantity) values(?,?,?,?)");
                 ps.setString(1, ID);
                 ps.setString(2, name);
                 ps.setString(3, price);
                 ps.setString(4, quantity);
-                ps.setString(5, isDish);
                 ps.executeUpdate();
                 this.getExistingProductIDs();
                 JOptionPane.showMessageDialog(null, "Product has been successfully added.");
@@ -286,16 +303,6 @@ public class ManageProducts extends javax.swing.JFrame {
         String quantity = model.getValueAt(index, 3).toString();
         ProductQuantityTxt.setText(quantity);
         
-        String isDish = model.getValueAt(index, 4).toString();
-        isDishComboBox.removeAllItems();
-        if(isDish.equals("Yes")){
-            isDishComboBox.addItem("Yes");
-            isDishComboBox.addItem("No");
-        }
-        else{
-            isDishComboBox.addItem("No");
-            isDishComboBox.addItem("Yes");
-        }
         ProductIDTxt.setEditable(false);
         prodSavebtn.setEnabled(false);
         prodUpdatebtn.setEnabled(true);
@@ -307,7 +314,6 @@ public class ManageProducts extends javax.swing.JFrame {
         String name = ProductNameTxt.getText();
         String price = ProductPriceTxt.getText();
         String quantity = ProductQuantityTxt.getText();
-        String isDish = (String) isDishComboBox.getSelectedItem();
         if (fieldChecker("Update") == 1) {
             JOptionPane.showMessageDialog(null, "All necessary fields must be inputted.");
         } 
@@ -317,12 +323,11 @@ public class ManageProducts extends javax.swing.JFrame {
         else{
             try {
                 Connection con = MyConnection.getCon();
-                PreparedStatement ps = con.prepareStatement("update products set product_name=?,product_price=?,product_quantity=?,isDish=? where product_ID=?");
+                PreparedStatement ps = con.prepareStatement("update products set product_name=?,product_price=?,product_quantity=? where product_ID=?");
                 ps.setString(1, name);
                 ps.setString(2, price);
                 ps.setString(3, quantity);
-                ps.setString(4, isDish);
-                ps.setString(5, ID);
+                ps.setString(4, ID);
                 ps.executeUpdate();
                 this.getExistingProductIDs();
                 JOptionPane.showMessageDialog(null, "Product has been successfully updated.");
@@ -368,10 +373,6 @@ public class ManageProducts extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_prodDeletebtnActionPerformed
 
-    private void iconLabelComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_iconLabelComponentShown
-
-    }//GEN-LAST:event_iconLabelComponentShown
-
     private void productTableComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_productTableComponentShown
         // TODO add your handling code here:
     }//GEN-LAST:event_productTableComponentShown
@@ -384,12 +385,48 @@ public class ManageProducts extends javax.swing.JFrame {
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery("select * from products");
             while (rs.next()) {
-                model.addRow(new Object[]{rs.getString("product_ID"), rs.getString("product_name"), rs.getString("product_price"), rs.getString("product_quantity"), rs.getString("isDish")});
+                model.addRow(new Object[]{rs.getString("product_ID"), rs.getString("product_name"), rs.getString("product_price"), rs.getString("product_quantity")});
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
     }//GEN-LAST:event_formComponentShown
+
+    private void prodTransactionbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prodTransactionbtnActionPerformed
+        // TODO add your handling code here:
+        setVisible(false);
+        new ProductTransactions().setVisible(true);
+    }//GEN-LAST:event_prodTransactionbtnActionPerformed
+
+    private void prodReportbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prodReportbtnActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_prodReportbtnActionPerformed
+
+    private void prodExecutebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prodExecutebtnActionPerformed
+        // TODO add your handling code here:
+        if(ProductExecuteTxt.getText().equals("")){
+            JOptionPane.showMessageDialog(null, "Please enter a query first.");
+        }
+        else{
+            String query = ProductExecuteTxt.getText();
+            try{
+                Connection con = MyConnection.getCon();
+                Statement st = con.createStatement();
+                ResultSet rs = st.executeQuery(query);
+                JOptionPane.showMessageDialog(null, "Query has been executed.");
+                String result = "product_ID" + " " + "product_name" + " " + "product_price" + " " + "product_quantity" + "\nvalues\n";
+                while(rs.next()){
+                    result += rs.getString("product_ID") + " " + rs.getString("product_name") + " " + rs.getString("product_price") + " " + rs.getString("product_quantity") + "\n";
+                }
+                executeResultsTextArea.setText(result);
+                ProductExecuteTxt.setText("");
+            }
+            catch(Exception e){
+                JOptionPane.showMessageDialog(null,e);
+            }
+        }
+    }//GEN-LAST:event_prodExecutebtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -419,7 +456,7 @@ public class ManageProducts extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
+        java.awt.EventQueue.invokeLater(new Runnable(){
             public void run() {
                 new ManageProducts().setVisible(true);
             }
@@ -427,20 +464,24 @@ public class ManageProducts extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel ManageProductslbl;
+    private javax.swing.JTextField ProductExecuteTxt;
     private javax.swing.JTextField ProductIDTxt;
     private javax.swing.JTextField ProductNameTxt;
     private javax.swing.JTextField ProductPriceTxt;
     private javax.swing.JTextField ProductQuantityTxt;
-    private javax.swing.JLabel iconLabel;
-    private javax.swing.JComboBox<String> isDishComboBox;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JTextArea executeResultsTextArea;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton prodClosebtn;
     private javax.swing.JButton prodDeletebtn;
+    private javax.swing.JButton prodExecutebtn;
     private javax.swing.JLabel prodIDlbl;
+    private javax.swing.JButton prodReportbtn;
     private javax.swing.JButton prodSavebtn;
+    private javax.swing.JButton prodTransactionbtn;
     private javax.swing.JButton prodUpdatebtn;
-    private javax.swing.JLabel prodisDishlbl;
+    private javax.swing.JLabel prodViewProductslbl;
     private javax.swing.JLabel prodnamelbl;
     private javax.swing.JLabel prodpricelbl;
     private javax.swing.JLabel prodquanlbl;
