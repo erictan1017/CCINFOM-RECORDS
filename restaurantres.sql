@@ -34,6 +34,26 @@ CREATE TABLE `products` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Table structure for table `reservations`
+--
+DROP TABLE IF EXISTS `reservations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `reservations` (
+	`reservation_ID` int NOT NULL,
+	`account_ID` int NOT NULL,
+	`date` date NOT NULL,
+	`number_of_seats` int NOT NULL,
+	`staff_ID` int NOT NULL,
+	`product_ID` int NOT NULL,
+	PRIMARY KEY (`reservation_ID`),
+	FOREIGN KEY (`account_ID`) REFERENCES customers(account_ID),
+	FOREIGN KEY (`staff_ID`) REFERENCES staff(staff_ID),
+	FOREIGN KEY (`product_ID`) REFERENCES products(product_ID)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `products`
 --
 
@@ -41,6 +61,17 @@ LOCK TABLES `products` WRITE;
 /*!40000 ALTER TABLE `products` DISABLE KEYS */;
 INSERT INTO `products` VALUES (1,'carrot',20,15,'No'),(2,'mango shake',150,10,'Yes'),(3,'beef shank',600,7,'No'),(4,'veal',650,5,'No'),(5,'salmon',700,10,'No'),(6,'osso buco',850,4,'Yes'),(7,'mashed potato',200,5,'Yes'),(8,'french onion soup',350,9,'Yes'),(9,'minestrone',300,9,'Yes'),(10,'tomato',100,15,'No');
 /*!40000 ALTER TABLE `products` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+--
+-- Dumping data for table `reservations`
+--
+
+LOCK TABLES `reservations` WRITE;
+/*!40000 ALTER TABLE `reservations` DISABLE KEYS */;
+INSERT INTO `reservations` VALUES (1, 2, '2024-11-25', 4, 3, 2), (2, 1, '2024-12-01', 2, 1, 6), (3, 3, '2024-12-08', 6, 2, 7), (4, 5, '2024-12-08', 2, 4, 8), (5, 4, '2024-12-23', 2, 1, 6);
+/*!40000 ALTER TABLE `reservations` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
