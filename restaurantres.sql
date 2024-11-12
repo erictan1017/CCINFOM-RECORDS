@@ -16,24 +16,6 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `products`
---
-
-DROP TABLE IF EXISTS `products`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `products` (
-  `product_ID` int NOT NULL,
-  `product_name` varchar(45) NOT NULL,
-  `product_price` float NOT NULL,
-  `product_quantity` int NOT NULL,
-  `isDish` varchar(3) NOT NULL,
-  PRIMARY KEY (`product_ID`),
-  UNIQUE KEY `product_ID_UNIQUE` (`product_ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
 -- Table structure for table `customers`
 --
 
@@ -47,7 +29,72 @@ CREATE TABLE `customers` (
   `membershipDiscount` float NOT NULL,
   PRIMARY KEY (`account_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
+--
+-- Dumping data for table `customers`
+--
+
+LOCK TABLES `customers` WRITE;
+/*!40000 ALTER TABLE `customers` DISABLE KEYS */;
+INSERT INTO `customers` VALUES (1,0,'Jimothy Jim',0),(2,1,'Ericson Tan',0.05),(3,2,'Edward Lim',0.1),(4,3,'Tracy Cruz',0.15),(5,4,'Lilith Stone',0.2);
+/*!40000 ALTER TABLE `customers` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `dishes`
+--
+
+DROP TABLE IF EXISTS `dishes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `dishes` (
+  `dish_ID` int NOT NULL,
+  `dish_name` varchar(45) NOT NULL,
+  `dish_price` varchar(45) NOT NULL,
+  `dish_quantity` varchar(45) NOT NULL,
+  PRIMARY KEY (`dish_ID`),
+  UNIQUE KEY `dish_ID_UNIQUE` (`dish_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `dishes`
+--
+
+LOCK TABLES `dishes` WRITE;
+/*!40000 ALTER TABLE `dishes` DISABLE KEYS */;
+INSERT INTO `dishes` VALUES (1,'carrot cake','200','15'),(2,'mango shake','150','10'),(3,'beef bourguinon','1000','7'),(4,'lamb chops','850','5'),(5,'grilled salmon','750','10'),(6,'osso buco','850','4'),(7,'mashed potato','200','5'),(8,'french onion soup','350','9'),(9,'minestrone','300','9'),(10,'tomato straws','150','15');
+/*!40000 ALTER TABLE `dishes` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `reservations`
+--
+
+DROP TABLE IF EXISTS `reservations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `reservations` (
+  `reservation_ID` int NOT NULL,
+  `account_ID` int NOT NULL,
+  `date` date NOT NULL,
+  `number_of_seats` int NOT NULL,
+  `staff_ID` int NOT NULL,
+  `product_ID` int DEFAULT NULL,
+  PRIMARY KEY (`reservation_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `reservations`
+--
+
+LOCK TABLES `reservations` WRITE;
+/*!40000 ALTER TABLE `reservations` DISABLE KEYS */;
+INSERT INTO `reservations` VALUES (1,2,'2024-11-25',4,3,2),(2,1,'2024-12-01',2,1,6),(3,3,'2024-12-08',6,2,7),(4,5,'2024-12-08',2,4,8),(5,4,'2024-12-23',2,1,6);
+/*!40000 ALTER TABLE `reservations` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `staffs`
@@ -64,49 +111,7 @@ CREATE TABLE `staffs` (
   `salary` float NOT NULL,
   PRIMARY KEY (`staff_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Table structure for table `reservations`
---
-
-DROP TABLE IF EXISTS `reservations`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `reservations` (
-	`reservation_ID` int NOT NULL,
-	`account_ID` int NOT NULL,
-	`date` date NOT NULL,
-	`number_of_seats` int NOT NULL,
-	`staff_ID` int NOT NULL,
-	`product_ID` int NOT NULL,
-	PRIMARY KEY (`reservation_ID`),
-	FOREIGN KEY (`account_ID`) REFERENCES customers(account_ID),
-	FOREIGN KEY (`staff_ID`) REFERENCES staff(staff_ID),
-	FOREIGN KEY (`product_ID`) REFERENCES products(product_ID)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `products`
---
-
-LOCK TABLES `products` WRITE;
-/*!40000 ALTER TABLE `products` DISABLE KEYS */;
-INSERT INTO `products` VALUES (1,'carrot',20,15,'No'),(2,'mango shake',150,10,'Yes'),(3,'beef shank',600,7,'No'),(4,'veal',650,5,'No'),(5,'salmon',700,10,'No'),(6,'osso buco',850,4,'Yes'),(7,'mashed potato',200,5,'Yes'),(8,'french onion soup',350,9,'Yes'),(9,'minestrone',300,9,'Yes'),(10,'tomato',100,15,'No');
-/*!40000 ALTER TABLE `products` ENABLE KEYS */;
-UNLOCK TABLES;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
-
---
--- Dumping data for table `customers`
---
-
-LOCK TABLES `customers` WRITE;
-/*!40000 ALTER TABLE `staffs` DISABLE KEYS */;
-INSERT INTO `customers` VALUES (1, 0, 'Jimothy Jim', 0.0), (2, 1, 'Ericson Tan', 0.05), (3, 2, 'Edward Lim', 0.1), (4, 3, 'Tracy Cruz', 0.15), (5, 4, 'Lilith Stone', 0.2);
-/*!40000 ALTER TABLE `staffs` ENABLE KEYS */;
-UNLOCK TABLES;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 --
 -- Dumping data for table `staffs`
@@ -114,19 +119,8 @@ UNLOCK TABLES;
 
 LOCK TABLES `staffs` WRITE;
 /*!40000 ALTER TABLE `staffs` DISABLE KEYS */;
-INSERT INTO `staffs` VALUES (1, 'John Doe', 28, '2024-11-15', 3000.00), (2, 'Jane Doe', 34, '2024-11-20', 3200.00), (3, 'Luis Roa', 26, '2024-11-25', 2800.00), (4, 'Alice Johnson', 30, '2024-12-01', 3100.00), (5, 'Chris Lee', 40, '2024-12-05', 3500.00);
+INSERT INTO `staffs` VALUES (1,'John Doe',28,'2024-11-15',3000),(2,'Jane Doe',34,'2024-11-20',3200),(3,'Luis Roa',26,'2024-11-25',2800),(4,'Alice Johnson',30,'2024-12-01',3100),(5,'Chris Lee',40,'2024-12-05',3500);
 /*!40000 ALTER TABLE `staffs` ENABLE KEYS */;
-UNLOCK TABLES;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
-
---
--- Dumping data for table `reservations`
---
-
-LOCK TABLES `reservations` WRITE;
-/*!40000 ALTER TABLE `reservations` DISABLE KEYS */;
-INSERT INTO `reservations` VALUES (1, 2, '2024-11-25', 4, 3, 2), (2, 1, '2024-12-01', 2, 1, 6), (3, 3, '2024-12-08', 6, 2, 7), (4, 5, '2024-12-08', 2, 4, 8), (5, 4, '2024-12-23', 2, 1, 6);
-/*!40000 ALTER TABLE `reservations` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -138,4 +132,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-11-10  4:35:50
+-- Dump completed on 2024-11-12 17:44:31
