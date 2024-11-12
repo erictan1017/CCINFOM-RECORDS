@@ -351,7 +351,7 @@ public class ProductTransactions extends javax.swing.JFrame {
         // TODO add your handling code here:
         JOptionPane.showConfirmDialog(null, "Are you sure you want to end the transaction?");
         setVisible(false);
-        new ManageProducts().setVisible(true);
+        new ManageInventory().setVisible(true);
     }//GEN-LAST:event_endTransactionbtnActionPerformed
 
     /**
