@@ -34,7 +34,7 @@ CREATE TABLE `products` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `staffs`
+-- Table structure for table `customers`
 --
 
 DROP TABLE IF EXISTS `customers`;
