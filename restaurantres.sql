@@ -37,6 +37,22 @@ CREATE TABLE `products` (
 -- Table structure for table `staffs`
 --
 
+DROP TABLE IF EXISTS `customers`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `customers` (
+  `account_ID` int NOT NULL,
+  `membershipTier` int NOT NULL,
+  `name` varchar(45) NOT NULL,
+  `membershipDiscount` float NOT NULL,
+  PRIMARY KEY (`account_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+--
+-- Table structure for table `staffs`
+--
+
 DROP TABLE IF EXISTS `staffs`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
@@ -78,6 +94,17 @@ LOCK TABLES `products` WRITE;
 /*!40000 ALTER TABLE `products` DISABLE KEYS */;
 INSERT INTO `products` VALUES (1,'carrot',20,15,'No'),(2,'mango shake',150,10,'Yes'),(3,'beef shank',600,7,'No'),(4,'veal',650,5,'No'),(5,'salmon',700,10,'No'),(6,'osso buco',850,4,'Yes'),(7,'mashed potato',200,5,'Yes'),(8,'french onion soup',350,9,'Yes'),(9,'minestrone',300,9,'Yes'),(10,'tomato',100,15,'No');
 /*!40000 ALTER TABLE `products` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+--
+-- Dumping data for table `customers`
+--
+
+LOCK TABLES `customers` WRITE;
+/*!40000 ALTER TABLE `staffs` DISABLE KEYS */;
+INSERT INTO `customers` VALUES (1, 0, 'Jimothy Jim', 0.0), (2, 1, 'Ericson Tan', 0.05), (3, 2, 'Edward Lim', 0.1), (4, 3, 'Tracy Cruz', 0.15), (5, 4, 'Lilith Stone', 0.2);
+/*!40000 ALTER TABLE `staffs` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
