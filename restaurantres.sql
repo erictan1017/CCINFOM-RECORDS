@@ -2,7 +2,7 @@
 --
 -- Host: localhost    Database: restaurantres
 -- ------------------------------------------------------
--- Server version	8.0.37
+-- Server version	8.0.39
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -51,8 +51,8 @@ DROP TABLE IF EXISTS `dishes`;
 CREATE TABLE `dishes` (
   `dish_ID` int NOT NULL,
   `dish_name` varchar(45) NOT NULL,
-  `dish_price` varchar(45) NOT NULL,
-  `dish_quantity` varchar(45) NOT NULL,
+  `dish_price` float NOT NULL,
+  `dish_quantity` int NOT NULL,
   PRIMARY KEY (`dish_ID`),
   UNIQUE KEY `dish_ID_UNIQUE` (`dish_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -64,7 +64,7 @@ CREATE TABLE `dishes` (
 
 LOCK TABLES `dishes` WRITE;
 /*!40000 ALTER TABLE `dishes` DISABLE KEYS */;
-INSERT INTO `dishes` VALUES (1,'carrot cake','200','15'),(2,'mango shake','150','10'),(3,'beef bourguinon','1000','7'),(4,'lamb chops','850','5'),(5,'grilled salmon','750','10'),(6,'osso buco','850','4'),(7,'mashed potato','200','5'),(8,'french onion soup','350','9'),(9,'minestrone','300','9'),(10,'tomato straws','150','15');
+INSERT INTO `dishes` VALUES (1,'carrot cake',200,15),(2,'mango shake',150,10),(3,'beef bourguinon',1000,7),(4,'lamb chops',850,5),(5,'grilled salmon',750,10),(6,'osso buco',850,4),(7,'mashed potato',200,5),(8,'french onion soup',350,9),(9,'minestrone',300,9),(10,'tomato straws',150,15);
 /*!40000 ALTER TABLE `dishes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -82,7 +82,13 @@ CREATE TABLE `reservations` (
   `number_of_seats` int NOT NULL,
   `staff_ID` int NOT NULL,
   `dish_ID` int DEFAULT NULL,
-  PRIMARY KEY (`reservation_ID`)
+  PRIMARY KEY (`reservation_ID`),
+  KEY `accout_idx` (`account_ID`),
+  KEY `staff_ID_idx` (`staff_ID`),
+  KEY `dish_ID_idx` (`dish_ID`),
+  CONSTRAINT `account_ID` FOREIGN KEY (`account_ID`) REFERENCES `customers` (`account_ID`),
+  CONSTRAINT `dish_ID` FOREIGN KEY (`dish_ID`) REFERENCES `dishes` (`dish_ID`),
+  CONSTRAINT `staff_ID` FOREIGN KEY (`staff_ID`) REFERENCES `staffs` (`staff_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -132,4 +138,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-11-12 17:56:22
+-- Dump completed on 2024-11-14  9:39:52
