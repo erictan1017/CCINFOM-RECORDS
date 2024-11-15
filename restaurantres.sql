@@ -51,10 +51,9 @@ DROP TABLE IF EXISTS `dishes`;
 CREATE TABLE `dishes` (
   `dish_ID` int NOT NULL,
   `dish_name` varchar(45) NOT NULL,
-  `dish_price` varchar(45) NOT NULL,
-  `dish_quantity` varchar(45) NOT NULL,
-  PRIMARY KEY (`dish_ID`),
-  UNIQUE KEY `dish_ID_UNIQUE` (`dish_ID`)
+  `dish_price` float NOT NULL,
+  `dish_quantity` int NOT NULL,
+  PRIMARY KEY (`dish_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -64,36 +63,65 @@ CREATE TABLE `dishes` (
 
 LOCK TABLES `dishes` WRITE;
 /*!40000 ALTER TABLE `dishes` DISABLE KEYS */;
-INSERT INTO `dishes` VALUES (1,'carrot cake','200','15'),(2,'mango shake','150','10'),(3,'beef bourguinon','1000','7'),(4,'lamb chops','850','5'),(5,'grilled salmon','750','10'),(6,'osso buco','850','4'),(7,'mashed potato','200','5'),(8,'french onion soup','350','9'),(9,'minestrone','300','9'),(10,'tomato straws','150','15');
+INSERT INTO `dishes` VALUES (1,'carrot cake',200,15),(2,'mango shake',150,10),(3,'osso buco',850,4),(4,'mashed potato',200,5),(5,'french onion soup',350,9),(6,'minestrone',300,9),(7,'tomato straws',150,15);
 /*!40000 ALTER TABLE `dishes` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `reservations`
+-- Table structure for table `ingredient_list`
 --
 
-DROP TABLE IF EXISTS `reservations`;
+DROP TABLE IF EXISTS `ingredient_list`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `reservations` (
-  `reservation_ID` int NOT NULL,
-  `account_ID` int NOT NULL,
-  `date` date NOT NULL,
-  `number_of_seats` int NOT NULL,
-  `staff_ID` int NOT NULL,
-  `dish_ID` int DEFAULT NULL,
-  PRIMARY KEY (`reservation_ID`)
+CREATE TABLE `ingredient_list` (
+  `il_dishID` int NOT NULL,
+  `il_rmID` int NOT NULL,
+  `il_quantity` int NOT NULL,
+  PRIMARY KEY (`il_dishID`,`il_rmID`),
+  KEY `recipe_rmID_idx` (`il_rmID`),
+  CONSTRAINT `recipe_dishID` FOREIGN KEY (`il_dishID`) REFERENCES `dishes` (`dish_ID`),
+  CONSTRAINT `recipe_rmID` FOREIGN KEY (`il_rmID`) REFERENCES `rawmaterial` (`rm_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `reservations`
+-- Dumping data for table `ingredient_list`
 --
 
-LOCK TABLES `reservations` WRITE;
-/*!40000 ALTER TABLE `reservations` DISABLE KEYS */;
-INSERT INTO `reservations` VALUES (1,2,'2024-11-25',4,3,2),(2,1,'2024-12-01',2,1,6),(3,3,'2024-12-08',6,2,7),(4,5,'2024-12-08',2,4,8),(5,4,'2024-12-23',2,1,6);
-/*!40000 ALTER TABLE `reservations` ENABLE KEYS */;
+LOCK TABLES `ingredient_list` WRITE;
+/*!40000 ALTER TABLE `ingredient_list` DISABLE KEYS */;
+INSERT INTO `ingredient_list` VALUES (1,4,5),(2,5,2),(3,2,2),(3,3,2),(3,4,2),(4,1,4),(5,3,3),(6,2,4),(6,3,3),(6,4,2),(7,2,10);
+/*!40000 ALTER TABLE `ingredient_list` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `rawmaterial`
+--
+
+DROP TABLE IF EXISTS `rawmaterial`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `rawmaterial` (
+  `rm_ID` int NOT NULL,
+  `rm_vendorID` int NOT NULL,
+  `rm_name` varchar(45) NOT NULL,
+  `rm_price` float NOT NULL,
+  `rm_quantity` int NOT NULL,
+  PRIMARY KEY (`rm_ID`),
+  KEY `rm_vendorID_idx` (`rm_vendorID`),
+  CONSTRAINT `rm_vendorID` FOREIGN KEY (`rm_vendorID`) REFERENCES `supplier` (`supplier_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `rawmaterial`
+--
+
+LOCK TABLES `rawmaterial` WRITE;
+/*!40000 ALTER TABLE `rawmaterial` DISABLE KEYS */;
+INSERT INTO `rawmaterial` VALUES (1,1,'potato',50,20),(2,3,'tomato',45,56),(3,2,'onion',55,32),(4,3,'carrot',40,23),(5,1,'mango',35,11);
+/*!40000 ALTER TABLE `rawmaterial` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -122,6 +150,30 @@ LOCK TABLES `staffs` WRITE;
 INSERT INTO `staffs` VALUES (1,'John Doe',28,'2024-11-15',3000),(2,'Jane Doe',34,'2024-11-20',3200),(3,'Luis Roa',26,'2024-11-25',2800),(4,'Alice Johnson',30,'2024-12-01',3100),(5,'Chris Lee',40,'2024-12-05',3500);
 /*!40000 ALTER TABLE `staffs` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `supplier`
+--
+
+DROP TABLE IF EXISTS `supplier`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `supplier` (
+  `supplier_ID` int NOT NULL,
+  `supplier_name` varchar(45) NOT NULL,
+  PRIMARY KEY (`supplier_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `supplier`
+--
+
+LOCK TABLES `supplier` WRITE;
+/*!40000 ALTER TABLE `supplier` DISABLE KEYS */;
+INSERT INTO `supplier` VALUES (1,'Carti '),(2,'Alibaba'),(3,'Pepsico');
+/*!40000 ALTER TABLE `supplier` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -132,4 +184,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-11-12 17:56:22
+-- Dump completed on 2024-11-16  6:44:05
