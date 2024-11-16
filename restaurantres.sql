@@ -176,6 +176,65 @@ INSERT INTO `supplier` VALUES (1,'Carti '),(2,'Alibaba'),(3,'Pepsico');
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
+--
+-- Table structure for table `PurchaseOrder`
+--
+
+DROP TABLE IF EXISTS `PurchaseOrder`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `PurchaseOrder` (
+  `PO_ID` int NOT NULL,
+  `supplier_ID` int NOT NULL,
+  `purchaseDate` date NOT NULL,
+  `grandTotal` float NOT NULL,
+  PRIMARY KEY (`PO_ID`),
+  KEY `supplier_ID_idx` (`supplier_ID`),
+  CONSTRAINT `fk_supplier` FOREIGN KEY (`supplier_ID`) REFERENCES `supplier` (`supplier_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `PurchaseOrder`
+--
+
+LOCK TABLES `PurchaseOrder` WRITE;
+/*!40000 ALTER TABLE `PurchaseOrder` DISABLE KEYS */;
+INSERT INTO `PurchaseOrder` VALUES (1, 1, '2024-11-01', 4500.00), (2, 2, '2024-11-05', 6200.00), (3, 3, '2024-11-10', 3800.00), (4, 1, '2024-11-15', 2000.00);
+/*!40000 ALTER TABLE `PurchaseOrder` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+--
+-- Table structure for table `PODetails`
+--
+
+DROP TABLE IF EXISTS `PODetails`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `PODetails` (
+  `PO_ID` int NOT NULL,
+  `rm_ID` int NOT NULL,
+  `quantity` int NOT NULL,
+  `subtotalPrice` float NOT NULL,
+  PRIMARY KEY (`PO_ID`, `rm_ID`),
+  KEY `rm_ID_idx` (`rm_ID`),
+  CONSTRAINT `fk_PO` FOREIGN KEY (`PO_ID`) REFERENCES `PurchaseOrder` (`PO_ID`),
+  CONSTRAINT `fk_rm` FOREIGN KEY (`rm_ID`) REFERENCES `rawmaterial` (`rm_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `PODetails`
+--
+
+LOCK TABLES `PODetails` WRITE;
+/*!40000 ALTER TABLE `PODetails` DISABLE KEYS */;
+INSERT INTO `PODetails` VALUES (1, 1, 20, 1000.00), (1, 4, 25, 1000.00), (2, 2, 50, 2250.00), (2, 3, 40, 2200.00), (3, 5, 30, 1050.00), (4, 4, 20, 800.00);  
+/*!40000 ALTER TABLE `PODetails` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
