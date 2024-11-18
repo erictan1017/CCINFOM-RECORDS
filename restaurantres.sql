@@ -235,6 +235,86 @@ INSERT INTO `PODetails` VALUES (1, 1, 20, 1000.00), (1, 4, 25, 1000.00), (2, 2, 
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
+-- Table structure for table `reservations`
+--
+DROP TABLE IF EXISTS `reservations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `reservations` (
+	`reservation_ID` int NOT NULL,
+	`account_ID` int NOT NULL,
+	`date` date NOT NULL,
+	`seatCount` int NOT NULL,
+	`staff_ID` int NOT NULL,
+	PRIMARY KEY (`reservation_ID`),
+	FOREIGN KEY (`account_ID`) REFERENCES customers(account_ID),
+	FOREIGN KEY (`staff_ID`) REFERENCES staffs(staff_ID)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `reservations`
+--
+LOCK TABLES `reservations` WRITE;
+/*!40000 ALTER TABLE `reservations` DISABLE KEYS */;
+INSERT INTO `reservations` VALUES (1, 2, '2024-11-25', 1, 3), (2, 1, '2024-12-01', 1, 1), (3, 3, '2024-12-08', 1, 2), (4, 5, '2024-12-08', 1, 4), (5, 4, '2024-12-23', 2, 1);
+/*!40000 ALTER TABLE `reservations` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+
+-- Table structure for table `OrderTable`
+--
+DROP TABLE IF EXISTS `OrderTable`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `reservations` (
+	`order_ID` int NOT NULL,
+	`reservation_ID` int NOT NULL,
+	`grandTotal` float NOT NULL,
+	`payment` float NOT NULL,
+	PRIMARY KEY (`order_ID`),
+	FOREIGN KEY (`reservation_ID`) REFERENCES reservations(reservation_ID)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `OrderTable`
+--
+LOCK TABLES `OrderTable` WRITE;
+/*!40000 ALTER TABLE `OrderTable` DISABLE KEYS */;
+INSERT INTO `OrderTable` VALUES (1, 1, 500, 500), (2, 2, 300, 300), (3, 3, 1000, 1000), (4, 4, 200, 200), (5, 5, 1400, 1400);
+/*!40000 ALTER TABLE `reservations` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+
+-- Table structure for table `OrderDetail`
+--
+DROP TABLE IF EXISTS `OrderDetail`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `reservations` (
+	`order_ID` int NOT NULL,
+	`dish_ordered` int NOT NULL,
+	`quantity` int NOT NULL,
+	`subtotalPrice` float NOT NULL,
+	FOREIGN KEY (`order_ID`) REFERENCES OrderTable(order_ID)
+FOREIGN KEY (`dish_ordered`) REFERENCES dishes(dish_ID)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `OrderTable`
+--
+LOCK TABLES `OrderTable` WRITE;
+/*!40000 ALTER TABLE `OrderTable` DISABLE KEYS */;
+INSERT INTO `OrderTable` VALUES (1, 2, 1, 150), (1, 5, 1, 350), (2, 6, 1, 300), (3, 3, 1, 850), (3, 7, 1, 150), (4, 1, 1, 200), (5, 1, 2, 400), (5, 6, 2, 600), (5, 4, 2 ,400);
+/*!40000 ALTER TABLE `reservations` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
