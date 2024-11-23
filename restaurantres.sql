@@ -283,7 +283,7 @@ CREATE TABLE `OrderTable` (
 --
 LOCK TABLES `OrderTable` WRITE;
 /*!40000 ALTER TABLE `OrderTable` DISABLE KEYS */;
-INSERT INTO `OrderTable` VALUES (1, 1, 500, 500), (2, 2, 300, 300), (3, 3, 1000, 1000), (4, 4, 200, 200), (5, 5, 1400, 1400);
+INSERT INTO `OrderTable` VALUES (1, 1, 500, 'Cash'), (2, 2, 300, 'Card'), (3, 3, 1000, 'Cash'), (4, 4, 200, 'Card'), (5, 5, 1400, 'Cash');
 /*!40000 ALTER TABLE `OrderTable` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
