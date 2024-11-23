@@ -284,7 +284,7 @@ CREATE TABLE `OrderTable` (
 LOCK TABLES `OrderTable` WRITE;
 /*!40000 ALTER TABLE `OrderTable` DISABLE KEYS */;
 INSERT INTO `OrderTable` VALUES (1, 1, 500, 500), (2, 2, 300, 300), (3, 3, 1000, 1000), (4, 4, 200, 200), (5, 5, 1400, 1400);
-/*!40000 ALTER TABLE `reservations` ENABLE KEYS */;
+/*!40000 ALTER TABLE `OrderTable` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -299,8 +299,8 @@ CREATE TABLE `OrderDetail` (
 	`dish_ordered` int NOT NULL,
 	`quantity` int NOT NULL,
 	`subtotalPrice` float NOT NULL,
-	FOREIGN KEY (`order_ID`) REFERENCES OrderTable(order_ID)
-FOREIGN KEY (`dish_ordered`) REFERENCES dishes(dish_ID)
+	FOREIGN KEY (`order_ID`) REFERENCES OrderTable(order_ID),
+	FOREIGN KEY (`dish_ordered`) REFERENCES dishes(dish_ID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -308,9 +308,9 @@ FOREIGN KEY (`dish_ordered`) REFERENCES dishes(dish_ID)
 -- Dumping data for table `OrderTable`
 --
 LOCK TABLES `OrderDetail` WRITE;
-/*!40000 ALTER TABLE `OrderTable` DISABLE KEYS */;
+/*!40000 ALTER TABLE `OrderDetail` DISABLE KEYS */;
 INSERT INTO `OrderDetail` VALUES (1, 2, 1, 150), (1, 5, 1, 350), (2, 6, 1, 300), (3, 3, 1, 850), (3, 7, 1, 150), (4, 1, 1, 200), (5, 1, 2, 400), (5, 6, 2, 600), (5, 4, 2 ,400);
-/*!40000 ALTER TABLE `reservations` ENABLE KEYS */;
+/*!40000 ALTER TABLE `OrderDetail` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
