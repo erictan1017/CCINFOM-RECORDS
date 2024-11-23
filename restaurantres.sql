@@ -135,7 +135,7 @@ CREATE TABLE `staffs` (
   `staff_ID` int NOT NULL,
   `name` varchar(50) NOT NULL,
   `age` int NOT NULL,
-  `working_Day` date NOT NULL,
+  `working_Day` VARCHAR(10) NOT NULL,
   `salary` float NOT NULL,
   PRIMARY KEY (`staff_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -147,7 +147,7 @@ CREATE TABLE `staffs` (
 
 LOCK TABLES `staffs` WRITE;
 /*!40000 ALTER TABLE `staffs` DISABLE KEYS */;
-INSERT INTO `staffs` VALUES (1,'John Doe',28,'2024-11-15',3000),(2,'Jane Doe',34,'2024-11-20',3200),(3,'Luis Roa',26,'2024-11-25',2800),(4,'Alice Johnson',30,'2024-12-01',3100),(5,'Chris Lee',40,'2024-12-05',3500);
+INSERT INTO `staffs` VALUES (1,'John Doe',28,'Monday',3000),(2,'Jane Doe',34,'Tuesday',3200),(3,'Luis Roa',26,'Wednesday',2800),(4,'Alice Johnson',30,'Thursday',3100),(5,'Chris Lee',40,'Friday',3500);
 /*!40000 ALTER TABLE `staffs` ENABLE KEYS */;
 UNLOCK TABLES;
 
