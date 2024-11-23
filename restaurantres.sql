@@ -268,7 +268,7 @@ UNLOCK TABLES;
 DROP TABLE IF EXISTS `OrderTable`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `reservations` (
+CREATE TABLE `OrderTable` (
 	`order_ID` int NOT NULL,
 	`reservation_ID` int NOT NULL,
 	`grandTotal` float NOT NULL,
@@ -294,7 +294,7 @@ UNLOCK TABLES;
 DROP TABLE IF EXISTS `OrderDetail`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `reservations` (
+CREATE TABLE `OrderDetail` (
 	`order_ID` int NOT NULL,
 	`dish_ordered` int NOT NULL,
 	`quantity` int NOT NULL,
@@ -307,9 +307,9 @@ FOREIGN KEY (`dish_ordered`) REFERENCES dishes(dish_ID)
 --
 -- Dumping data for table `OrderTable`
 --
-LOCK TABLES `OrderTable` WRITE;
+LOCK TABLES `OrderDetail` WRITE;
 /*!40000 ALTER TABLE `OrderTable` DISABLE KEYS */;
-INSERT INTO `OrderTable` VALUES (1, 2, 1, 150), (1, 5, 1, 350), (2, 6, 1, 300), (3, 3, 1, 850), (3, 7, 1, 150), (4, 1, 1, 200), (5, 1, 2, 400), (5, 6, 2, 600), (5, 4, 2 ,400);
+INSERT INTO `OrderDetail` VALUES (1, 2, 1, 150), (1, 5, 1, 350), (2, 6, 1, 300), (3, 3, 1, 850), (3, 7, 1, 150), (4, 1, 1, 200), (5, 1, 2, 400), (5, 6, 2, 600), (5, 4, 2 ,400);
 /*!40000 ALTER TABLE `reservations` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
